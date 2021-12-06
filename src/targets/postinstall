@@ -1,0 +1,4 @@
+#!/bin/bash
+ls -al
+tail -F anything
+#asadmin deploy StruutsExample-1.0.war
