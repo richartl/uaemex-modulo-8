@@ -1,3 +1,4 @@
 *.env
 *.DS_Store
 /src/Tarea6/target/
+/src/Tarea7/target/
