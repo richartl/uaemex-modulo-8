@@ -16,7 +16,7 @@ services:
     volumes:
       - "./src/targets:/usr/local/tomcat/webapps"
     ports:
-      - "8888:8080"
+      - "${TOMCAT_PORT}:8080"
     environment:
       - DB_HOST="${DB_HOST}"
       - DB_PASS="${DB_PASS}"
@@ -27,7 +27,7 @@ services:
     volumes:
       - "./src/targets:/usr/local/glassfish4/apps"
     ports:
-      - "8889:8080"
+      - "${GLASSFISH_PORT}:8080"
       - "4849:4848"
     environment:
       - DB_HOST="${DB_HOST}"
