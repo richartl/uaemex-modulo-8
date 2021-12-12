@@ -6,17 +6,22 @@ services:
       - "./src:/usr/src/mymaven"
     working_dir: '/usr/src/mymaven'
     entrypoint: 'tail -F anything'
-      #server:
-      #  image: tomcat
-      #  volumes:
-      #    - "./src/targets:/usr/local/tomcat/webapps"
-      #  ports:
-      #    - "8888:8080"
-      #  environment:
-      #    - DB_HOST="${DB_HOST}"
-      #    - DB_PASS="${DB_PASS}"
-      #    - DB_USER="${DB_USER}"
-      #    - DB_NAME="${DB_NAME}"
+    environment:
+      - DB_HOST="${DB_HOST}"
+      - DB_PASS="${DB_PASS}"
+      - DB_USER="${DB_USER}"
+      - DB_NAME="${DB_NAME}"
+  tomcat:
+    image: tomcat:8-jdk8-corretto
+    volumes:
+      - "./src/targets:/usr/local/tomcat/webapps"
+    ports:
+      - "8888:8080"
+    environment:
+      - DB_HOST="${DB_HOST}"
+      - DB_PASS="${DB_PASS}"
+      - DB_USER="${DB_USER}"
+      - DB_NAME="${DB_NAME}"
   glassfish:
     image: glassfish:latest
     volumes:
@@ -32,18 +37,14 @@ services:
   mysql:
     image: mysql:5.6
     environment:
-      - MYSQL_ROOT_PASSWORD="${DB_PASS}"
-      - MYSQL_DATABASE="${DB_NAME}"
-      - MYSQL_PASSWORD="${DB_PASS}"
+      - MYSQL_ROOT_PASSWORD=${DB_PASS}
     volumes:
       - db-data:/var/lib/mysql
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     environment:
-      - MYSQL_ROOT_PASSWORD="${DB_PASS}"
       - PMA_HOST=mysql
     ports:
       - 8082:80
-
 volumes:
   db-data:
