@@ -16,6 +16,7 @@ import lombok.Data;
  *
  * @author richartl
  */
+
 @Data
 @Entity
 @Table(name="members")
